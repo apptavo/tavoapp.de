@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutz – Tavo</title>
+<meta name="description" content="Tavo – Dein Restaurant-Tagebuch: bewerten, merken, Leuten mit gutem Geschmack folgen.">
+<meta name="theme-color" content="#D62828">
+<link rel="icon" href="/logo.png">
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js"></script>
+</head>
+<body>
+<header>
+<a class="brand" href="/"><img src="/logo.png" alt="" width="40" height="40">Tavo</a>
+<div class="lang"><button id="lang" type="button" aria-label="Sprache / Language">EN</button></div>
+</header>
+<main>
+<div data-l="de">
+<h1>Datenschutzerklärung</h1>
+<div class="draft">Entwurf – wird vor dem Launch rechtlich geprüft. Platzhalter in gelb sind noch auszufüllen.</div>
+<p>Stand: November 2026 (Entwurf)</p>
+
+<h2>1. Verantwortlicher</h2>
+<p><span class="ph">[NAME]</span>, <span class="ph">[ANSCHRIFT]</span><br>E-Mail: <a href="mailto:hallo@tavoapp.de">hallo@tavoapp.de</a></p>
+
+<h2>2. Was Tavo ist</h2>
+<p>Tavo ist eine App, in der du Restaurants bewertest, Besuche in einem Tagebuch festhältst, Läden auf eine Merkliste setzt, Listen erstellst und anderen Nutzern folgst. Diese Erklärung beschreibt, welche Daten dabei verarbeitet werden und welche Dienstleister wir einsetzen.</p>
+
+<h2>3. Welche Daten wir verarbeiten</h2>
+<ul>
+<li><b>Konto:</b> E-Mail-Adresse, Passwort (nur als Hash gespeichert), Benutzername, Anzeigename, optional Profilbild, Bio und Social-Media-Namen (Instagram, TikTok), gewählte Sprache.</li>
+<li><b>Inhalte:</b> Bewertungen, Besuche (Datum, Notizen, Gerichte, Fotos, optional ein Video-Link), Merkliste, Listen, Lieblingsläden, Kommentare, Likes, Folgen, Meldungen und Blockierungen, Vorschläge zu Läden und Änderungen.</li>
+<li><b>Standort:</b> Nur wenn du es erlaubst (z. B. „Aktueller Standort“ für die Stadtauswahl und die Karte). Den Standort verwenden wir, um Läden in deiner Nähe zu zeigen; er wird nicht dauerhaft in deinem Profil gespeichert. Du kannst die Berechtigung jederzeit in den Geräte-Einstellungen widerrufen.</li>
+<li><b>Technische Daten:</b> IP-Adresse und Zeitpunkt bei Anfragen an unsere Server und Dienstleister, Gerätetyp, App-Version.</li>
+</ul>
+<p>Rechtsgrundlagen: Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) für Konto und Funktionen, Einwilligung (lit. a) für Standort und Fotos-Zugriff, berechtigtes Interesse (lit. f) für Sicherheit, Missbrauchsschutz und Moderation.</p>
+
+<h2>4. Eingesetzte Dienste</h2>
+<div class="card">
+<h2>Supabase (Datenbank, Anmeldung, Dateispeicher, Serverfunktionen)</h2>
+<p>Alle Konto- und Inhaltsdaten sowie hochgeladene Fotos liegen bei Supabase. Server-Standort: <span class="ph">[REGION des Supabase-Projekts, z. B. EU – vor Launch im Dashboard prüfen]</span>. Anbieter: Supabase, Inc., USA. Mit dem Anbieter besteht ein Auftragsverarbeitungsvertrag <span class="ph">[prüfen/abschließen]</span>.</p>
+<h2>Resend (E-Mail-Versand)</h2>
+<p>Für Bestätigungscodes, Passwort-Zurücksetzen und die Willkommensmail übermitteln wir deine E-Mail-Adresse und den Mailtext an Resend (Resend, Inc., USA). Absender: noreply@tavoapp.de.</p>
+<h2>OpenAI Moderation (USA)</h2>
+<p>Zum Schutz vor Beleidigungen, Hass und unangemessenen Inhalten werden Kommentare, Besuchstexte, Gerichtsnamen, Listen-Titel und -Beschreibungen, Anzeigenamen, Bio sowie Besuchs- und Profilfotos automatisch von der Moderations-Schnittstelle von OpenAI (OpenAI, L.L.C., USA) geprüft. Übermittelt werden nur der zu prüfende Text bzw. das Bild, nicht dein Name oder deine E-Mail-Adresse. Die Übermittlung in die USA stützt sich auf <span class="ph">[Standardvertragsklauseln / Data Privacy Framework – prüfen]</span>. Bei Grenzfällen kann ein Inhalt zur manuellen Prüfung markiert werden.</p>
+<h2>Apple Karten und Google Maps</h2>
+<p>Die Karte nutzt auf iOS Apple Karten (Apple Inc.), auf Android Google Maps (Google Ireland Ltd. / Google LLC). Dabei können deine IP-Adresse und der sichtbare Kartenausschnitt an den jeweiligen Anbieter übertragen werden.</p>
+<h2>OpenStreetMap und Foursquare (Restaurantdaten)</h2>
+<p>Die Restaurantdaten (Name, Adresse, Öffnungszeiten usw.) stammen aus OpenStreetMap (© OpenStreetMap-Mitwirkende, ODbL) und Foursquare OS Places (Apache 2.0). Das sind öffentliche Datensätze zu Läden, keine Nutzerdaten. Für die Umwandlung von Adressen in Koordinaten (z. B. bei Laden-Vorschlägen) wird der Geocoding-Dienst Nominatim von OpenStreetMap genutzt; dabei wird die eingegebene Adresse übermittelt.</p>
+<h2>TikTok-Einbettung</h2>
+<p>Wenn ein Besuch einen TikTok-Link enthält und du das Video öffnest, wird es von TikTok geladen (TikTok Technology Limited, Irland / TikTok Inc., USA). Dabei erhält TikTok technische Daten wie deine IP-Adresse. Instagram-Links öffnen sich nur, wenn du sie antippst.</p>
+<h2>Expo / EAS (App-Build und Updates)</h2>
+<p>Die App wird mit Diensten von Expo (650 Industries, Inc., USA) gebaut und ausgeliefert. Beim Laden von App-Updates können technische Daten (IP-Adresse, App- und Geräteversion) verarbeitet werden.</p>
+<h2>IONOS (Domain und E-Mail)</h2>
+<p>Die Domain tavoapp.de und unser E-Mail-Postfach (z. B. hallo@/support@tavoapp.de) werden bei IONOS SE, Deutschland, betrieben. Wenn du uns schreibst, verarbeiten wir deine Nachricht zur Beantwortung.</p>
+<h2>GitHub Pages (diese Website)</h2>
+<p>Diese Website wird über GitHub Pages (GitHub, Inc., USA) ausgeliefert. Dabei verarbeitet GitHub technische Zugriffsdaten (z. B. IP-Adresse). Wir binden keine Tracker, keine Werbung und keine externen Schriftarten ein; die Schrift liegt auf unserem eigenen Server.</p>
+<h2>Anmeldung mit Apple / Google</h2>
+<p><span class="ph">[Falls beim Launch aktiviert: Hinweis zur Anmeldung mit Apple bzw. Google ergänzen.]</span></p>
+</div>
+
+<h2>5. Öffentlichkeit deiner Inhalte</h2>
+<p>Bewertungen, Besuche, Listen, Kommentare und dein Profil (Name, Benutzername, Bild, Bio) sind für andere Tavo-Nutzer sichtbar. Deine E-Mail-Adresse ist es nicht.</p>
+
+<h2>6. Speicherdauer und Löschung</h2>
+<p>Wir speichern deine Daten, solange dein Konto besteht. In der App unter <i>Einstellungen → Konto löschen</i> kannst du dein Konto samt Inhalten selbst löschen. Gesetzliche Aufbewahrungspflichten und die Sicherung von Meldungen zum Schutz anderer Nutzer bleiben <span class="ph">[prüfen]</span> unberührt.</p>
+
+<h2>7. Deine Rechte</h2>
+<p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie auf Widerruf erteilter Einwilligungen. Schreib uns dazu an <a href="mailto:hallo@tavoapp.de">hallo@tavoapp.de</a>. Du kannst dich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren <span class="ph">[zuständige Behörde eintragen]</span>.</p>
+
+<h2>8. Kinder</h2>
+<p>Tavo richtet sich an Personen ab <span class="ph">[Mindestalter, z. B. 16]</span> Jahren.</p>
+
+<h2>9. Änderungen</h2>
+<p>Wir passen diese Erklärung an, wenn sich die App oder die eingesetzten Dienste ändern. Die aktuelle Fassung steht immer hier.</p></div><div data-l="en">
+<h1>Privacy Policy</h1>
+<div class="draft">Draft – will be legally reviewed before launch.</div>
+<p>Last updated: November 2026 (draft). The German version is authoritative until the legal review is complete.</p>
+
+<h2>1. Controller</h2>
+<p><span class="ph">[NAME]</span>, <span class="ph">[ADDRESS]</span><br>Email: <a href="mailto:hallo@tavoapp.de">hallo@tavoapp.de</a></p>
+
+<h2>2. What Tavo is</h2>
+<p>Tavo lets you rate restaurants, keep a visit diary, save places to a watchlist, create lists and follow other users. This policy describes which data is processed and which service providers we use.</p>
+
+<h2>3. Data we process</h2>
+<ul>
+<li><b>Account:</b> email address, password (stored only as a hash), username, display name, optional profile picture, bio and social handles (Instagram, TikTok), chosen language.</li>
+<li><b>Content:</b> ratings, visits (date, notes, dishes, photos, optional video link), watchlist, lists, favorite spots, comments, likes, follows, reports and blocks, place and change suggestions.</li>
+<li><b>Location:</b> only if you allow it (e.g. “Current location” for city selection and the map). We use it to show places near you; it is not permanently stored in your profile. You can revoke the permission at any time in your device settings.</li>
+<li><b>Technical data:</b> IP address and time of requests to our servers and providers, device type, app version.</li>
+</ul>
+<p>Legal bases: performance of a contract (Art. 6(1)(b) GDPR) for the account and features, consent (point (a)) for location and photo access, legitimate interest (point (f)) for security, abuse prevention and moderation.</p>
+
+<h2>4. Services we use</h2>
+<div class="card">
+<h2>Supabase (database, sign-in, file storage, server functions)</h2>
+<p>All account and content data and uploaded photos are stored at Supabase. Server location: <span class="ph">[Supabase project region, e.g. EU – check in dashboard before launch]</span>. Provider: Supabase, Inc., USA. Data processing agreement: <span class="ph">[check/conclude]</span>.</p>
+<h2>Resend (email delivery)</h2>
+<p>For confirmation codes, password reset and the welcome email we send your email address and the message to Resend (Resend, Inc., USA). Sender: noreply@tavoapp.de.</p>
+<h2>OpenAI Moderation (USA)</h2>
+<p>To protect against insults, hate and inappropriate content, comments, visit texts, dish names, list titles and descriptions, display names, bios and visit and profile photos are automatically checked by OpenAI’s moderation API (OpenAI, L.L.C., USA). Only the text or image to be checked is sent, not your name or email. The transfer to the USA relies on <span class="ph">[standard contractual clauses / Data Privacy Framework – check]</span>. Borderline content may be flagged for manual review.</p>
+<h2>Apple Maps and Google Maps</h2>
+<p>The map uses Apple Maps on iOS (Apple Inc.) and Google Maps on Android (Google Ireland Ltd. / Google LLC). Your IP address and the visible map area may be transmitted to the respective provider.</p>
+<h2>OpenStreetMap and Foursquare (restaurant data)</h2>
+<p>Restaurant data (name, address, opening hours, etc.) comes from OpenStreetMap (© OpenStreetMap contributors, ODbL) and Foursquare OS Places (Apache 2.0). These are public datasets about places, not user data. To turn addresses into coordinates (e.g. for place suggestions) we use OpenStreetMap’s Nominatim geocoder; the entered address is transmitted.</p>
+<h2>TikTok embed</h2>
+<p>If a visit contains a TikTok link and you open the video, it is loaded from TikTok (TikTok Technology Limited, Ireland / TikTok Inc., USA), which receives technical data such as your IP address. Instagram links only open when you tap them.</p>
+<h2>Expo / EAS (app builds and updates)</h2>
+<p>The app is built and delivered with services from Expo (650 Industries, Inc., USA). Loading app updates may process technical data (IP address, app and device version).</p>
+<h2>IONOS (domain and email)</h2>
+<p>The domain tavoapp.de and our mailboxes (e.g. hallo@/support@tavoapp.de) are operated by IONOS SE, Germany. If you write to us, we process your message to reply.</p>
+<h2>GitHub Pages (this website)</h2>
+<p>This website is served via GitHub Pages (GitHub, Inc., USA), which processes technical access data (e.g. IP address). We use no trackers, ads or external fonts; the font is hosted on our own server.</p>
+<h2>Sign in with Apple / Google</h2>
+<p><span class="ph">[If enabled at launch: add a note on Sign in with Apple / Google.]</span></p>
+</div>
+
+<h2>5. Visibility of your content</h2>
+<p>Ratings, visits, lists, comments and your profile (name, username, picture, bio) are visible to other Tavo users. Your email address is not.</p>
+
+<h2>6. Retention and deletion</h2>
+<p>We keep your data as long as your account exists. In the app under <i>Settings → Delete account</i> you can delete your account and its content yourself. Statutory retention duties and the preservation of reports protecting other users remain <span class="ph">[check]</span> unaffected.</p>
+
+<h2>7. Your rights</h2>
+<p>You have the right of access, rectification, erasure, restriction, data portability and objection, and to withdraw consent. Write to <a href="mailto:hallo@tavoapp.de">hallo@tavoapp.de</a>. You may also complain to a data protection authority <span class="ph">[add competent authority]</span>.</p>
+
+<h2>8. Children</h2>
+<p>Tavo is intended for people aged <span class="ph">[minimum age, e.g. 16]</span> and over.</p>
+
+<h2>9. Changes</h2>
+<p>We update this policy when the app or the services we use change. The current version is always available here.</p></div>
+</main>
+<footer>
+<a href="/datenschutz/"><span data-l="de">Datenschutz</span><span data-l="en">Privacy</span></a>
+<a href="/nutzungsbedingungen/"><span data-l="de">Nutzungsbedingungen</span><span data-l="en">Terms</span></a>
+<a href="/impressum/"><span data-l="de">Impressum</span><span data-l="en">Legal notice</span></a>
+<a href="/support/">Support</a>
+<p>© Tavo · <a href="mailto:hallo@tavoapp.de">hallo@tavoapp.de</a></p>
+</footer>
+</body>
+</html>
