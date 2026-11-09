@@ -1,6 +1,6 @@
-/* Teilen-Seiten: tavoapp.de/r/<name>-<id> (Restaurant), /u/<handle> (Profil), /l/<id> (Liste).
+/* Teilen-Seiten: tavoapp.de/r/<name>-<id> (Restaurant), /u/<handle> (Profil), /l/<id> (Liste), /i/<handle> (Einladung).
    GitHub Pages kennt diese Adressen nicht als Dateien und liefert dafür 404.html aus – die rendert hier die richtige Seite.
-   Daten kommen über drei öffentliche Datenbankfunktionen (public_restaurant / public_profile / public_list), die nur
+   Daten kommen über öffentliche Datenbankfunktionen (public_restaurant / public_profile / public_list / public_invite), die nur
    bereits öffentliche Felder liefern. Der Schlüssel unten ist der öffentliche „publishable“ Schlüssel (darf im Browser stehen). */
 (function () {
   var SUPABASE_URL = 'https://lvfypkvaiextsmyrchxr.supabase.co';
@@ -152,6 +152,37 @@
     main.appendChild(card);
   }
 
+  function renderInvite(main, d, handle) {
+    setTitle(d.display_name);
+    var h = d.handle || handle;
+    var card = el('div', 'card invite', []);
+    /* Profilbild (nur ein Pfad aus der Datenbank); ohne Bild der Anfangsbuchstabe */
+    var initial = el('span', 'avatar avatar-initial', [(d.display_name || h || '?').charAt(0).toUpperCase()]);
+    initial.setAttribute('aria-hidden', 'true');
+    if (d.avatar_path && /^[0-9a-f-]{36}\/[A-Za-z0-9_.-]+\.(jpg|jpeg|png|webp)$/i.test(d.avatar_path)) {
+      var img = el('img', 'avatar', []);
+      img.src = SUPABASE_URL + '/storage/v1/object/public/avatars/' + d.avatar_path;
+      img.alt = '';
+      img.width = 96;
+      img.height = 96;
+      img.onerror = function () { img.replaceWith(initial); };
+      card.appendChild(img);
+    } else {
+      card.appendChild(initial);
+    }
+    card.appendChild(el('p', 'eyebrow', [both('Einladung', 'Invitation')]));
+    var title = el('h1', '', [both('@' + h + ' lädt dich zu Tavo ein', '@' + h + ' invites you to Tavo')]);
+    card.appendChild(title);
+    card.appendChild(el('p', '', [d.display_name + (d.is_verified_blogger ? ' ✓' : '')]));
+    var n = Number(d.visit_count) || 0;
+    card.appendChild(el('p', 'muted', [both(n + (n === 1 ? ' Besuch' : ' Besuche'), n + (n === 1 ? ' visit' : ' visits'))]));
+    card.appendChild(el('h2', '', [both('Lieblingsläden', 'Favorite spots')]));
+    if (d.favorites.length) card.appendChild(numbered(d.favorites));
+    else card.appendChild(el('p', 'muted', [both('Noch keine Lieblingsläden', 'No favorite spots yet')]));
+    card.appendChild(openButton('tavo://invite/' + encodeURIComponent(h)));
+    main.appendChild(card);
+  }
+
   function renderList(main, d, id) {
     setTitle(d.title);
     var author = el('p', 'muted', []);
@@ -168,13 +199,14 @@
   function run() {
     var main = document.getElementById('view');
     if (!main) return;
-    var m = location.pathname.match(/^\/(r|u|l)\/([^\/]+)\/?$/);
+    var m = location.pathname.match(/^\/(r|u|l|i)\/([^\/]+)\/?$/);
     if (!m) { notFound(main); return; }
     var kind = m[1];
     var raw = decodeURIComponent(m[2]);
     var call;
     if (kind === 'r') call = rpc('public_restaurant', { p_id: raw.split('-').pop() }).then(function (d) { if (!d) return false; renderRestaurant(main, d); return true; });
     else if (kind === 'u') call = rpc('public_profile', { p_handle: raw }).then(function (d) { if (!d) return false; renderProfile(main, d, raw); return true; });
+    else if (kind === 'i') call = rpc('public_invite', { p_handle: raw }).then(function (d) { if (!d) return false; renderInvite(main, d, raw); return true; });
     else call = rpc('public_list', { p_id: raw }).then(function (d) { if (!d) return false; renderList(main, d, raw); return true; });
     main.textContent = '';
     main.appendChild(el('p', 'muted', [both('Lädt …', 'Loading …')]));
