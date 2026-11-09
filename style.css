@@ -26,3 +26,14 @@ ul{padding-left:1.2em}
 .ph{background:#ffe3a3;border-radius:4px;padding:0 4px}
 footer{max-width:760px;margin:0 auto;padding:20px;text-align:center;font-size:14px;border-top:1px solid #e9d8d8}
 footer a{margin:0 8px;color:var(--text)}
+.eyebrow{margin:12px 0 0;color:var(--secondary);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.muted{opacity:.7}
+.rating{font-size:1.2em;margin:.4em 0}
+.stars{position:relative;display:inline-block;font-size:1.4em;line-height:1;letter-spacing:2px;vertical-align:middle}
+.stars-bg{color:#e6d6d6}
+.stars-fill{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#FFB400}
+.places{padding-left:1.4em}
+.places li{margin:.4em 0}
+.open-box{text-align:center;margin:24px 0 8px}
+.open{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;padding:12px 28px}
+.store-hint{margin:10px 0 0;font-size:14px;opacity:.75}
