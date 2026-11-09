@@ -94,11 +94,19 @@
     var street = [d.street, d.house_number].filter(Boolean).join(' ');
     var cityLine = [d.postal_code, d.city].filter(Boolean).join(' ');
     var address = [street, cityLine].filter(Boolean).join(', ');
-    var card = el('div', 'card', [
-      el('p', 'eyebrow', [both('Restaurant', 'Restaurant')]),
-      el('h1', '', [d.name]),
-      el('p', 'muted', [category(d.category)])
-    ]);
+    var card = el('div', 'card', []);
+    /* Titelbild: bestes freigegebenes Nutzerfoto (nur ein Pfad aus der Datenbank, nie ein fremdes Logo) */
+    if (d.cover_path && /^[0-9a-f-]{36}\/[A-Za-z0-9_-]+\.(jpg|jpeg|png|webp)$/i.test(d.cover_path)) {
+      var cover = el('img', 'cover', []);
+      cover.src = SUPABASE_URL + '/storage/v1/object/public/visit-photos/' + d.cover_path;
+      cover.alt = '';
+      cover.loading = 'lazy';
+      cover.onerror = function () { cover.remove(); };
+      card.appendChild(cover);
+    }
+    card.appendChild(el('p', 'eyebrow', [both('Restaurant', 'Restaurant')]));
+    card.appendChild(el('h1', '', [d.name]));
+    card.appendChild(el('p', 'muted', [category(d.category)]));
     if (d.avg_rating != null && d.rating_count > 0) {
       var line = el('p', 'rating', [stars(d.avg_rating), el('b', '', [' ' + format(d.avg_rating, lang)])]);
       var count = el('span', 'muted', [' · ']);
@@ -108,6 +116,22 @@
       card.appendChild(line);
     } else {
       card.appendChild(el('p', 'muted', [both('Noch keine Bewertungen', 'No ratings yet')]));
+    }
+    /* Preis: Ø pro Person aus den Besuchen (und Spanne), sonst „noch unbekannt“ */
+    var avg = d.avg_price == null ? null : Math.round(Number(d.avg_price));
+    if (avg != null && d.price_count > 0) {
+      var min = Math.round(Number(d.min_price)), max = Math.round(Number(d.max_price));
+      var range = min !== max ? ' · ' : '';
+      var priceLine = el('p', '', []);
+      priceLine.appendChild(both('Ø ' + avg + ' € pro Person', 'Ø €' + avg + ' per person'));
+      if (range) {
+        var rangeSpan = el('span', 'muted', [' · ']);
+        rangeSpan.appendChild(both('Spanne ' + min + '–' + max + ' €', 'Range €' + min + '–' + max));
+        priceLine.appendChild(rangeSpan);
+      }
+      card.appendChild(priceLine);
+    } else {
+      card.appendChild(el('p', 'muted', [both('Preis: noch unbekannt', 'Price: not known yet')]));
     }
     if (address) card.appendChild(el('p', '', [address]));
     card.appendChild(openButton('tavo://restaurant/' + encodeURIComponent(d.id)));
