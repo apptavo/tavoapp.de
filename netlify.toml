@@ -1,0 +1,43 @@
+# Netlify: reine HTML-Seite ohne Build-Schritt, dazu die Edge Function netlify/edge-functions/share-meta.ts
+# (Link-Vorschau für /r/…, /u/…, /l/…, /i/…).
+
+[build]
+  publish = "."
+  # Spart Credits: Nur veröffentlichen, wenn sich wirklich Website-Dateien geändert haben (README & Co. zählen nicht).
+  # Exit 0 = überspringen, sonst bauen. Gleicher Commit (erster Deploy, „Retry deploy“) → immer bauen.
+  ignore = "[ \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" ] && git diff --quiet \"$CACHED_COMMIT_REF\" \"$COMMIT_REF\" -- . ':(exclude)README.md' ':(exclude).gitignore' ':(exclude).github/'"
+
+# Teilen-Seiten: GitHub Pages lieferte sie als 404.html (Status 404) aus. Hier dieselbe Seite, aber mit Status 200 –
+# die Edge Function setzt vorher die Vorschau-Tags ein (bei nicht öffentlichem Inhalt gibt sie selbst 404 zurück).
+[[redirects]]
+  from = "/r/*"
+  to = "/404.html"
+  status = 200
+
+[[redirects]]
+  from = "/u/*"
+  to = "/404.html"
+  status = 200
+
+[[redirects]]
+  from = "/l/*"
+  to = "/404.html"
+  status = 200
+
+[[redirects]]
+  from = "/i/*"
+  to = "/404.html"
+  status = 200
+
+# Interne Dateien nicht ausliefern
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
