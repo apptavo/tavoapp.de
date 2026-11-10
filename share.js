@@ -1,5 +1,5 @@
 /* Teilen-Seiten: tavoapp.de/r/<name>-<id> (Restaurant), /u/<handle> (Profil), /l/<id> (Liste), /i/<handle> (Einladung).
-   GitHub Pages kennt diese Adressen nicht als Dateien und liefert dafür 404.html aus – die rendert hier die richtige Seite.
+   Netlify schreibt diese Adressen auf 404.html um (netlify.toml, Status 200; Vorschau-Tags setzt netlify/edge-functions/share-meta.ts) – die rendert hier die richtige Seite.
    Daten kommen über öffentliche Datenbankfunktionen (public_restaurant / public_profile / public_list / public_invite), die nur
    bereits öffentliche Felder liefern. Der Schlüssel unten ist der öffentliche „publishable“ Schlüssel (darf im Browser stehen). */
 (function () {

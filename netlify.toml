@@ -7,7 +7,7 @@
   # Exit 0 = überspringen, sonst bauen. Gleicher Commit (erster Deploy, „Retry deploy“) → immer bauen.
   ignore = "[ \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" ] && git diff --quiet \"$CACHED_COMMIT_REF\" \"$COMMIT_REF\" -- . ':(exclude)README.md' ':(exclude).gitignore' ':(exclude).github/'"
 
-# Teilen-Seiten: GitHub Pages lieferte sie als 404.html (Status 404) aus. Hier dieselbe Seite, aber mit Status 200 –
+# Teilen-Seiten: dieselbe Seite 404.html, aber mit Status 200 –
 # die Edge Function setzt vorher die Vorschau-Tags ein (bei nicht öffentlichem Inhalt gibt sie selbst 404 zurück).
 [[redirects]]
   from = "/r/*"
