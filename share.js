@@ -78,6 +78,64 @@
     return ol;
   }
 
+  /* Beta-Anmeldung (bis es TestFlight-/Play-Links gibt): E-Mail + Gerät → Edge Function beta-signup (Honeypot „website“, Mengenbegrenzung serverseitig) */
+  function betaForm() {
+    var lang = function () { return document.documentElement.lang === 'en' ? 'en' : 'de'; };
+    var box = el('div', 'beta', []);
+    box.appendChild(el('h2', '', [both('Beta-Tester werden', 'Become a beta tester')]));
+    box.appendChild(el('p', 'muted', [both('Tavo ist noch nicht im Store. Trag dich ein – wir melden uns, sobald du testen kannst.', 'Tavo isn’t in the store yet. Sign up and we’ll get in touch as soon as you can test it.')]));
+    var form = el('form', 'beta-form', []);
+    form.noValidate = true;
+    var email = el('input', '', []);
+    email.type = 'email'; email.name = 'email'; email.required = true; email.maxLength = 254; email.autocomplete = 'email'; email.inputMode = 'email';
+    email.setAttribute('aria-label', 'E-Mail');
+    email.placeholder = 'name@example.com';
+    var radios = el('div', 'beta-os', []);
+    [['ios', 'iPhone', 'iPhone'], ['android', 'Android', 'Android']].forEach(function (o, i) {
+      var r = el('input', '', []); r.type = 'radio'; r.name = 'platform'; r.value = o[0]; if (i === 0) r.checked = true;
+      radios.appendChild(el('label', '', [r, ' ' + o[1]]));
+    });
+    var trap = el('input', '', []); /* Honeypot: für Menschen unsichtbar */
+    trap.type = 'text'; trap.name = 'website'; trap.tabIndex = -1; trap.autocomplete = 'off'; trap.setAttribute('aria-hidden', 'true');
+    var trapWrap = el('div', 'beta-trap', [trap]);
+    var submit = el('button', 'open', [both('Anmelden', 'Sign up')]);
+    submit.type = 'submit';
+    var privacy = el('p', 'beta-note', []);
+    privacy.appendChild(both('Wir nutzen deine E-Mail nur, um dich zur Beta einzuladen. ', 'We only use your email to invite you to the beta. '));
+    var link = el('a', '', [both('Datenschutz', 'Privacy policy')]); link.href = '/datenschutz/';
+    privacy.appendChild(link);
+    var msg = el('p', 'beta-msg', []); msg.setAttribute('role', 'alert');
+    [email, radios, trapWrap, submit, privacy, msg].forEach(function (n) { form.appendChild(n); });
+    function say(de, en) { msg.textContent = ''; if (de) msg.appendChild(both(de, en)); }
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      say('', '');
+      var value = email.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) { say('Bitte gib eine gültige E-Mail-Adresse ein.', 'Please enter a valid email address.'); email.focus(); return; }
+      submit.disabled = true;
+      fetch(SUPABASE_URL + '/functions/v1/beta-signup', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: value, platform: form.platform.value, locale: lang(), website: trap.value })
+      }).then(function (r) {
+        if (r.ok) {
+          box.textContent = '';
+          box.appendChild(el('h2', '', [both('Danke! 🎉', 'Thank you! 🎉')]));
+          box.appendChild(el('p', '', [both('Du bist auf der Liste. Wir schreiben dir, sobald die Beta startet.', 'You’re on the list. We’ll email you as soon as the beta starts.')]));
+          return;
+        }
+        submit.disabled = false;
+        if (r.status === 429) say('Heute gab es zu viele Anmeldungen von diesem Anschluss. Bitte versuche es morgen noch einmal.', 'Too many sign-ups from this connection today. Please try again tomorrow.');
+        else if (r.status === 400) say('Bitte prüfe deine Eingabe.', 'Please check your input.');
+        else say('Das hat nicht geklappt. Bitte versuche es später noch einmal.', 'Something went wrong. Please try again later.');
+      }).catch(function () {
+        submit.disabled = false;
+        say('Keine Verbindung. Bitte versuche es später noch einmal.', 'No connection. Please try again later.');
+      });
+    });
+    box.appendChild(form);
+    return box;
+  }
+
   function setTitle(text) { document.title = text + ' – Tavo'; }
 
   function notFound(main) {
@@ -180,6 +238,7 @@
     if (d.favorites.length) card.appendChild(numbered(d.favorites));
     else card.appendChild(el('p', 'muted', [both('Noch keine Lieblingsläden', 'No favorite spots yet')]));
     card.appendChild(openButton('tavo://invite/' + encodeURIComponent(h)));
+    card.appendChild(betaForm());
     main.appendChild(card);
   }
 
@@ -199,6 +258,7 @@
   function run() {
     var main = document.getElementById('view');
     if (!main) return;
+    if (/^\/i\/?$/.test(location.pathname)) { setTitle('Beta'); main.appendChild(el('div', 'card invite', [betaForm()])); return; }
     var m = location.pathname.match(/^\/(r|u|l|i)\/([^\/]+)\/?$/);
     if (!m) { notFound(main); return; }
     var kind = m[1];
